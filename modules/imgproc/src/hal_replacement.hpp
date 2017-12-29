@@ -772,6 +772,41 @@ inline int hal_ni_canny(const uchar* src_data, size_t src_step, uchar* dst_data,
 #define cv_hal_canny hal_ni_canny
 //! @endcond
 
+/**
+   @brief Computes cornerMinEigenVal.
+   @param src_data,src_step Source image.
+   @param dst_data,dst_step Destination image.
+   @param width,height Source image dimensions.
+   @param src_depth, Depth of source image.
+   @param margin_left,margin_top,margin_right,margin_bottom Margins for source image.
+   @param blockSize Neighborhood size.
+   @param ksize Size of Sobel kernel.
+   @param border_type Border type.
+*/
+inline int hal_ni_cornerMinEigenVal(const uchar* src_data, size_t src_step, uchar* dst_data, size_t dst_step, int width, int height, int src_depth, int margin_left, int margin_top, int margin_right, int margin_bottom, int blockSize, int ksize, int border_type) { return CV_HAL_ERROR_NOT_IMPLEMENTED; }
+
+//! @cond IGNORED
+#define cv_hal_cornerMinEigenVal hal_ni_cornerMinEigenVal
+//! @endcond
+
+/**
+   @brief Computes cornerHarris.
+   @param src_data,src_step Source image.
+   @param dst_data,dst_step Destination image.
+   @param width,height Source image dimensions.
+   @param src_depth, Depth of source image.
+   @param margin_left,margin_top,margin_right,margin_bottom Margins for source image.
+   @param blockSize Neighborhood size.
+   @param ksize Size of Sobel kernel.
+   @param k Harris detector free parameter.
+   @param border_type Border type.
+*/
+inline int hal_ni_cornerHarris(const uchar* src_data, size_t src_step, uchar* dst_data, size_t dst_step, int width, int height, int src_depth, int margin_left, int margin_top, int margin_right, int margin_bottom, int blockSize, int ksize, double k, int border_type) { return CV_HAL_ERROR_NOT_IMPLEMENTED; }
+
+//! @cond IGNORED
+#define cv_hal_cornerHarris hal_ni_cornerHarris
+//! @endcond
+
 //! @}
 
 #if defined __GNUC__

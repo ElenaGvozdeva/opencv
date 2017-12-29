@@ -584,6 +584,14 @@ void cv::cornerMinEigenVal( InputArray _src, OutputArray _dst, int blockSize, in
     _dst.create( src.size(), CV_32FC1 );
     Mat dst = _dst.getMat();
 
+    Point ofs;
+    Size wsz(src.cols, src.rows);
+    if(!(borderType&BORDER_ISOLATED))
+        src.locateROI( wsz, ofs );
+
+    CALL_HAL(cornerMinEigenVal, cv_hal_cornerMinEigenVal, src.data, src.step, dst.data, dst.step, src.cols, src.rows, src.depth(),
+             ofs.x, ofs.y, wsz.width - src.cols - ofs.x, wsz.height - src.rows - ofs.y, blockSize, ksize, borderType&~BORDER_ISOLATED);
+
     cornerEigenValsVecs( src, dst, blockSize, ksize, MINEIGENVAL, 0, borderType );
 }
 
@@ -657,6 +665,14 @@ void cv::cornerHarris( InputArray _src, OutputArray _dst, int blockSize, int ksi
     Mat src = _src.getMat();
     _dst.create( src.size(), CV_32FC1 );
     Mat dst = _dst.getMat();
+
+    Point ofs;
+    Size wsz(src.cols, src.rows);
+    if(!(borderType&BORDER_ISOLATED))
+        src.locateROI( wsz, ofs );
+
+    CALL_HAL(cornerHarris(), cv_hal_cornerHarris, src.data, src.step, dst.data, dst.step, src.cols, src.rows, src.depth(),
+             ofs.x, ofs.y, wsz.width - src.cols - ofs.x, wsz.height - src.rows - ofs.y, blockSize, ksize, k, borderType&~BORDER_ISOLATED);
 
 #ifdef HAVE_IPP
     int borderTypeNI = borderType & ~BORDER_ISOLATED;
